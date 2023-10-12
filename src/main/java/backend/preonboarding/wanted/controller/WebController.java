@@ -36,4 +36,9 @@ public class WebController {
         return ResponseEntity.ok(recruitment);
     }
 
+    @PostMapping("/update")
+    public ResponseEntity<Recruitment> UpdateRecruitment(@RequestBody RecruitmentDTO recruitmentDTO) {
+        Recruitment recruitment = recruitmentService.updateRecruitment(recruitmentDTO);
+        return ResponseEntity.ok(recruitment);
+    }
 }
