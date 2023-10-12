@@ -19,4 +19,11 @@ public class PageControllerAdvice {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(UpdateFailException.class)
+    public ResponseEntity<ErrorResponse> handleUpdateFailedException(UpdateFailException e) {
+        log.error("Update Fail Exception" + e.getMessage());
+        errorResponse = new ErrorResponse(e.getMessage(), HttpStatus.BAD_REQUEST.name(), HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
 }
