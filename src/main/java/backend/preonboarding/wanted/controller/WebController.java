@@ -50,4 +50,11 @@ public class WebController {
         List<Recruitment> recruitmentList = recruitmentRepository.findAll();
         return ResponseEntity.ok(recruitmentList);
     }
+
+    @GetMapping("/some/url")
+    public ResponseEntity<List<Recruitment>> SearchRecruitment(@RequestParam String value) {
+        log.info("value={}", value);
+        List<Recruitment> results = recruitmentService.searchRecruitment(value);
+        return ResponseEntity.ok(results);
+    }
 }
