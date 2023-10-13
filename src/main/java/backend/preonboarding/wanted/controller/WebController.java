@@ -8,10 +8,7 @@ import backend.preonboarding.wanted.service.RecruitmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,5 +37,17 @@ public class WebController {
     public ResponseEntity<Recruitment> UpdateRecruitment(@RequestBody RecruitmentDTO recruitmentDTO) {
         Recruitment recruitment = recruitmentService.updateRecruitment(recruitmentDTO);
         return ResponseEntity.ok(recruitment);
+    }
+
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<Recruitment> DeleteRecruitment(@PathVariable Long id) {
+        Recruitment recruitment = recruitmentService.deleteRecruitment(id);
+        return ResponseEntity.ok(recruitment);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<Recruitment>> RecruitmentList() {
+        List<Recruitment> recruitmentList = recruitmentRepository.findAll();
+        return ResponseEntity.ok(recruitmentList);
     }
 }

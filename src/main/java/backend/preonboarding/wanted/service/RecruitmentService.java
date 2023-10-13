@@ -83,4 +83,12 @@ public class RecruitmentService {
         return recruitmentRepository.saveAndFlush(recruitment);
     }
 
+    public Recruitment deleteRecruitment(Long id) {
+        Recruitment recruitment = recruitmentRepository.findById(id).orElse(null);
+        if (recruitment != null) {
+            recruitmentRepository.delete(recruitment);
+        }
+        return recruitment;
+    }
+
 }
