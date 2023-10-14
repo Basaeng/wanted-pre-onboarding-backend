@@ -3,6 +3,7 @@ package backend.preonboarding.wanted.service;
 import backend.preonboarding.wanted.entity.Company;
 import backend.preonboarding.wanted.entity.Recruitment;
 import backend.preonboarding.wanted.entity.RecruitmentDTO;
+import backend.preonboarding.wanted.entity.specification.RecruitmentSpecification;
 import backend.preonboarding.wanted.exception.InsertFailException;
 import backend.preonboarding.wanted.exception.UpdateFailException;
 import backend.preonboarding.wanted.repository.CompanyRepository;
@@ -83,4 +84,15 @@ public class RecruitmentService {
         return recruitmentRepository.saveAndFlush(recruitment);
     }
 
+    public Recruitment deleteRecruitment(Long id) {
+        Recruitment recruitment = recruitmentRepository.findById(id).orElse(null);
+        if (recruitment != null) {
+            recruitmentRepository.delete(recruitment);
+        }
+        return recruitment;
+    }
+
+    public List<Recruitment> searchRecruitment(String value) {
+        return recruitmentRepository.findAll(RecruitmentSpecification.findMatchString(value));
+    }
 }
